@@ -1,0 +1,44 @@
+{
+  "cobbler": {
+    "src": "/etc/cobbler",
+    "files" : {
+      "settings": {
+        "manage_dhcp": 1,
+        "manage_tftpd": 1,
+        "manage_dns": 0,
+        "restart_dhcp": 1,
+        "pxe_just_once": 1,
+        "next_server": "localhost",
+        "server": "localhost"
+      },
+      "modules.conf": {
+        "authentication": "authn_configfile",
+        "authorization": "authz_allwall",
+        "dns": "mange_bind",
+        "dhcp": "manage_isc",
+        "tftpd": "manage_in_tftpd"
+      },
+      "dhcp.template": {
+        "network": "192.168.2.0",
+        "netmask": "255.255.255.0",
+//        "routers": "192.168.2.1", // This is an optional value
+//        "domain-name-servers": "192.168.2.1", // This is an optional value
+//        "subnet-mask": "255.255.255.0", // This is an optional value
+//        "braodcast_address": "192.168.2.255", // This is an optional value
+        "range": "192.168.2.200 192.168.2.210",
+        "max_lease_time": 43200
+      },
+      "tftpd.template": {
+        "disable": "no",
+        "socket_type": "dgram",
+        "protocol": "udp",
+        "server_args": "-s /var/lib/tftpboot"
+      },
+      "user.conf": {
+        "admin": "admin",
+        "cobbler": "cobbler",
+        "test": "test"
+      }
+    }
+  }
+}

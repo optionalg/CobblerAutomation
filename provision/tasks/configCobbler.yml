@@ -1,0 +1,7 @@
+--- # CONFIGURE COBBLER SETTINGS
+
+#- name: Configure cobblers modules.conf file
+- replace: dest=/etc/cobbler/modules.conf regexp='^manage\_tftpd\: [0-9]$' replace='manage_tftpd: 1' backup=yes
+  #with_items:
+   # - dhcp
+    #- tftpd

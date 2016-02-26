@@ -1,0 +1,28 @@
+--- # INSTALL COBBLER AND NECESSARY PACKAGES
+
+- name: install cobbler
+  apt:
+      pkg: cobbler
+      state: present
+  service:
+      name: cobbler
+      state: restarted
+  become: yes
+
+- name: install cobbler-web
+  apt:
+      pkg: cobbler-web
+      state: present
+  become: yes
+
+- name: install debmirror
+  apt:
+      pkg: debmirror
+      state: present
+  become: yes
+
+- name: install mkisofs
+  apt:
+      pkg: mkisofs
+      state: present
+  become: yes

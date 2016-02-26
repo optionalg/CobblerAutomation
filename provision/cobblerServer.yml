@@ -1,0 +1,9 @@
+--- # INSTALL COBBLER SERVER WITH ALL THE REQUIREMENTS
+
+- hosts: localhost
+  gather_facts: yes
+  connection: ssh
+
+  tasks:
+  - include: tasks/cobbler.yml
+  - include: tasks/configCobbler.yml

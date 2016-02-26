@@ -1,0 +1,17 @@
+{
+    "nodes": {
+        "cobbler": {
+            "hypervisor": "virtualbox",
+            ":ip": "192.168.2.252",
+            "ports": [],
+            ":bridge_interface": "eth1",
+            ":memory": 1024,
+            ":cpus": "1",
+            ":cpucap": "90",
+            ":dnsresolver": "on",
+            ":dnsproxy": "on",
+            ":box": "ubuntu/trusty64",
+            ":install_ansible": "install_ansible.sh"
+        }
+    }
+}
