@@ -2,10 +2,11 @@
 
 import json
 import shutil
-import jinja2
+import os
+from jinja2 import Template
 
 
-def create_config(configs="config_files.json", templates="./templates"):
+def create_config(configs, templates="./templates"):
     """ Creates the necessary configuration files for cobbler and services
     rendered by cobbler.
 
@@ -14,8 +15,8 @@ def create_config(configs="config_files.json", templates="./templates"):
     - Creates the tftpd.template file
 
     Args:
-        configs (string): location of json file containing config parameters.
-                        Defaults to a config_files.json file in the current directory
+        configs (JSON   ): Json file containing config parameters.
+                        
         templates (string): location of jinja template files. Defaults to templates
                         directory from the current directory
     Returns:
@@ -23,4 +24,20 @@ def create_config(configs="config_files.json", templates="./templates"):
     """
 
 
-    pass
+    template_list = os.listdir(templates)
+    
+    for template in template_list:
+        with open(os.path.join(os.getcwd(),'templates',template), 'r+') as f:
+            tmp_template = Template(f.read())
+            f.seek(0)
+            f.write(tmp_template.render(configs['cobbler']['files'][template]))
+            
+        
+
+if __name__ == "__main__":
+    with open(os.path.join(os.getcwd(), 'config_files.json'), 'rw') as f:
+        config = json.loads(f.read())
+    
+    create_config(config, templates='./templates')
+        
+    

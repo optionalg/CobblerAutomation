@@ -20,8 +20,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define node_name do |config|
       config.vm.hostname = node_name
       config.vm.network :public_network,
-       ip: node_values[':ip'],
-       bridge: node_values[':bridge_interface']
+        use_dhcp_assigned_default_route: true,
+        bridge: "en1: Wi-Fi (AirPort)"
+#       ip: node_values[':ip'],
+#       bridge: node_values[':bridge_interface']
 
       config.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id,
@@ -34,11 +36,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                      ]
       end
 
-      config.vm.provision :shell, path: "bootstrapAnsible.sh"
-
-      config.vm.provision "ansible_local" do |ansible|
-        ansible.playbook = "provision/cobblerServer.yml"
-      end
+#      config.vm.provision :shell, path: "bootstrapAnsible.sh"
+#
+#      config.vm.provision "ansible_local" do |ansible|
+#        ansible.playbook = "provision/cobblerServer.yml"
+#      end
     end
   end
 end
