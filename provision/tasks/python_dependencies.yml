@@ -1,0 +1,17 @@
+--- # INSTALL ALL NECESSARY PYTHON DEPENDENCIES
+
+- name: install pip
+  apt:
+     pkg: python-pip
+     state: latest
+  become: yes
+
+- name: install build-essential
+  apt:
+      pkg: build-essential
+      state: latest
+  become: yes
+
+- name: install jinja2
+  shell: pip install jinja2
+  become: yes

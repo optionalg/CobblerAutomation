@@ -1,0 +1,11 @@
+--- # INSTALL COBBLER SERVER WITH ALL THE REQUIREMENTS
+
+- hosts: cobblerServer
+  remote_user: vagrant
+  gather_facts: yes
+  connection: ssh
+
+  tasks:
+  - include: tasks/cobbler.yml
+  - include: tasks/python_dependencies.yml
+  - include: tasks/createConfigFiles.yml

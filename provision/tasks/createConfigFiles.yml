@@ -1,0 +1,18 @@
+--- # RUN PYTHON SCRIPT THAT CREATES THE COBBLER CONFIGURATION FILES
+
+- name: create all cobblers conf and template files
+  shell: python createConfigFiles.py
+  args:
+      chdir: /home/vagrant/tasks/
+  become: yes
+
+- name: copy the modified config files to the correct place
+  shell: mv {{ item }} /etc/cobbler
+  args:
+      chdir: /home/vagrant/tasks
+  with_items:
+    - dhcp.template
+    - tftpd.template
+    - modules.conf
+    - users.conf
+  become: yes
